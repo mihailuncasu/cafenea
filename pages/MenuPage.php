@@ -1,83 +1,85 @@
+<?php
+require_once '../constants.php';
+?>
+
+
 <html>
 <head>
     <title>Menu Page</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+          integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round|Open+Sans">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="..\assets\css\MenuStyle.css">
-
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
-          integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<body style="zoom: 80%">
-
+<body>
 
 <?php
 include './NavBar.php';
 ?>
 
+<div class="container" style="display: grid">
+    <div class="Categorii">
+        <h2 class="categorie">Categorii produse</h2>
+    </div>
 
-<div class="Categorii">
-    <h2>Categorii produse</h2>
-</div>
-
-<div id="autoWidth" class="Produse">
-    <?php
-
-    require '../helper.php';
-    $helper = new Helper();
-    $categories = $helper->getAllProductCategories();
-    foreach ($categories as $category) :
-        ?>
-        <div class="sectiune-categorie">
-            <div class="category-box">
+    <div class="card-deck myCardDeck">
+        <?php
+        require '../helper.php';
+        $helper = new Helper();
+        $categories = $helper->getAllProductCategories();
+        foreach ($categories as $category) :
+            ?>
+            <div class="card mb-4 myProduct">
                 <a href="#<?= $category ?>">
-                    <img src="..\assets\images\<?= $category ?>.jpg"
+                    <img class="card-img-top img-fluid myImage" src="..\assets\images\<?= $category ?>.jpg"
                          alt="Vizualizeaza sortimentele noastre de <?= $category ?>"
                          title="Vizualizeaza sortimentele noastre de <?= $category ?>"/>
                 </a>
+                <div class="card-body myCard-body">
+                    <div class="myTitle">
+                        <h4 class="card-title">
+                            <?= ucfirst($category) ?>
+                        </h4>
+                    </div>
+                </div>
             </div>
-            <span><?= ucfirst($category) ?></span>
-        </div>
-    <?php endforeach; ?>
-</div>
+        <?php endforeach; ?>
+    </div>
 
-<div class="content">
 
     <?php
     foreach ($categories as $category) :
         $products = $helper->getAllProductsFromCategory($category);
         ?>
-        <section id="<?= $category ?>">
+        <section id="<?= $category ?>" class="section-4">
             <div class="Categorii">
-                <h2><?= ucfirst($category) ?></h2>
+                <h2 class="categorie"><?= $category ?></h2>
             </div>
-            <div id="autoWidth" class="sectiune-produse">
-                <?php
-                foreach ($products as $product) :
-                    ?>
-                    <div class="produs">
-                        <div class="category-boxP">
-                            <a href="#">
-                                <img src="..\assets\images\<?= $product['image_name'] ?>"/>
-                            </a>
-
-                        </div>
-
-                        <div class="details">
-                            <h3><?= $product['name'] ?></h3>
-                            <br>
-                            <p> <?= $product['price'] ?> lei &nbsp &nbsp <i class="fa fa-shopping-cart"></i></p>
-                        </div>
-
-                    </div>
-
-                <?php
-                endforeach;
-                ?>
-                <br>
         </section>
+        <div class="card-deck myCardDeck">
+            <?php foreach ($products as $product) : ?>
+                <div class="card mb-4 myProduct">
+                    <img class="card-img-top img-fluid myImage" src="..\assets\images\<?= $product['image_name'] ?>"/>
+                    <div class="card-body myCard-body">
+                        <div class="myTitle">
+                            <h4 class="card-title">
+                                <?= $product['name'] ?>
+                            </h4>
+                        </div>
+                        <div class="myText">
+                            <p class="card-text"><?= $product['price'] ?> lei &nbsp &nbsp
+                                <a href="Product.php?id=<?= $product['id'] ?>" style="color: #1b1919"><i class="fa fa-shopping-cart"></i></a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
     <?php endforeach; ?>
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-
 </div>
+
+
 <footer>
     <div class="footer-content">
         <h3>Coffe Shop</h3>
@@ -100,8 +102,6 @@ include './NavBar.php';
         </p>
     </div>
 </footer>
-
-
 </body>
 
 </head>

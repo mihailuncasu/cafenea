@@ -29,6 +29,12 @@ class Helper{
         return $this->db->resultSet();
     }
 
+    public function getProductById($id)
+    {
+        $this->db->query("SELECT * FROM products where id = $id");
+        return $this->db->singleEntry();
+    }
+
     public function insertUser($postValues){
 
         $passwordHash = sha1($postValues['pwd']);

@@ -35,7 +35,7 @@ require_once '../constants.php';
 
                     <div class="input-box">
                         <span class="details"><b>Password<b></span>
-                        <input type="text" placeholder="Enter your password" name="password" required>
+                        <input type="password" placeholder="Enter your password" name="password" required>
                     </div>
 
                 </div>

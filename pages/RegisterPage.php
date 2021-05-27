@@ -44,11 +44,11 @@ require_once '../constants.php';
                     </div>
                     <div class="input-box">
                         <span class="details"><b>Password</b></span>
-                        <input type="text" placeholder="Enter your password" name="pwd" required>
+                        <input type="password" placeholder="Enter your password" name="pwd" required>
                     </div>
                     <div class="input-box">
                         <span class="details"><b>Confirm Password</b></span>
-                        <input type="text" placeholder="Confirm your password" name="rpwd" required>
+                        <input type="password" placeholder="Confirm your password" name="rpwd" required>
                     </div>
 
                 </div>
